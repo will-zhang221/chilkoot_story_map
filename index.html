@@ -22,9 +22,10 @@
     <!-- loading a video as the background -->
     <video class="fullscreen canvas-center" playsinline="" autoplay="" muted="" loop="">
       <source src="assets/intro.mp4" type="video/mp4">
+      <!-- 720 1200 -->
     </video>
     <div id="intro">
-      <h1>GEOG 595</h1>
+      <h1>Chikoot</h1>
       <h5>This line is a place holder for subtitle, hello, world</h5>
       <p>This section shows where active research is happening, and on what topics to communicate on-going nature of
         scientific learning. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
@@ -66,6 +67,7 @@
 
     <article class="scene" data-scene="0">
       <h2>STEP 1: Loading Polygons</h2>
+      <p>fsdfdsaf</p>
     </article>
     <article class="scene" data-scene="1">
       <h2>STEP 2: Loading Points</h2>
@@ -116,7 +118,7 @@
     let map, scriptPanel = scrollama(), countiesLayer, cellTowersLayer;
 
     // 2. Intialize the layout.
-   
+
     history.scrollRestoration = "manual"; // make sure the geo-narrative will be scrolled to the cover page even after a page refresh.
     window.scrollTo(0, 0); // scroll the geo-narrative to the coverpage
     adjustStoryboardlSize(); // force a browser window resize.
@@ -133,7 +135,7 @@
       for (const scene of scenes) {
         scene.style.height = sceneH + "px";
       }
-      
+
       // 3.2 determin the height of the storyboard.
       let storyboardHeight = window.innerHeight;
       let storyboardMarginTop = (window.innerHeight - storyboardHeight) / 2;
@@ -148,7 +150,7 @@
     // 4. Initialize the mapbox
     mapboxgl.accessToken =
       'pk.eyJ1IjoiamFrb2J6aGFvIiwiYSI6ImNpcms2YWsyMzAwMmtmbG5icTFxZ3ZkdncifQ.P9MBej1xacybKcDN_jehvw'; // Assign the access token
-   
+
     map = new mapboxgl.Map({
       container: 'map', // container ID
       style: 'mapbox://styles/mapbox/light-v10',
@@ -222,7 +224,7 @@
           })
           .onStepEnter(handleSceneEnter)
           .onStepExit(handleSceneExit);
-        
+
         // 10. This function performs when a scene enters the storyboard
         function handleSceneEnter(response) {
 
@@ -236,7 +238,7 @@
               pitch: 0,
               speed: 0.5
             }); // fly to a new location
-            
+
             if (typeof (map.getSource('counties-src')) == 'undefined') { //if the map source 'counties-src' does not exist
               map.addSource('counties-src', {
                 type: 'geojson',
@@ -317,7 +319,7 @@
             if (map.getLayer("counties-polygons")) {
               map.removeLayer('counties-polygons');
             }
-            if (response.direction == 'down') { 
+            if (response.direction == 'down') {
               document.getElementById("cover").style.visibility = "hidden"; // when you scroll down, the cover page will be hided.
             } else {
               document.getElementById("cover").style.visibility = "visible"; // when you scroll up, the cover page will be shown.
@@ -329,7 +331,7 @@
           } else if (index === 3) {
             //exit to Portland
             map.setStyle('mapbox://styles/mapbox/light-v10');
-          } 
+          }
         }
 
 
