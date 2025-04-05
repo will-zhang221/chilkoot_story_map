@@ -18,10 +18,10 @@
 
 <body>
   <!-- loading a image as the background of the cover page -->
-  <section id="cover" style="background: url('img/background.jpg') no-repeat center center;  background-size: cover;">
+  <section id="cover" style="background: url('img/cover-trail.jpg') no-repeat center center;  background-size: cover;">
     <div id="intro">
-      <h1>A GeoNarrative Template</h1>
-      <h5>This line is a place holder for subtitle</h5>
+      <h1>Klondike Gold Rush</h1>
+      <!-- <h5>This line is a place holder for subtitle</h5> -->
       <p>This section shows where active research is happening, and on what topics to communicate on-going nature of
         scientific learning. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
         ligula
@@ -47,8 +47,8 @@
         nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.</p>
 
       <div class="footnote">
-        <span> This line is a place holder for copyright note or other footnotes.</span>
-        <a target="_blank" href="https://www.uw.edu"> <img src="img/uw_logo.png" width="50px"></a>
+        <span> This storymap is made by William Zhang. The lastest update is April 4, 2025</span>
+        <!-- <a target="_blank" href="https://www.uw.edu"> <img src="img/uw_logo.png" width="50px"></a> -->
       </div>
     </div>
   </section>
@@ -61,7 +61,19 @@
     </div>
 
     <article class="scene" data-scene="0">
-      <h2>STEP 1: Loading Polygons</h2>
+      <h2>Seattle</h2>
+      <p>The klondike gold rush is what lead to Seattle growing into a major city. The Klondike Gold Rush was a
+        migration
+        of an estimated 100,000 prospectors to the Klondike region of the Yukon in north-western Canada between 1896 and
+        1899. The
+        Klondike Gold Rush is considered a migration of epic proportions, and it was one of the largest gold rushes in
+        North America.
+        The Klondike Gold Rush was a migration of an estimated 100,000 prospectors to the Klondike region of the Yukon
+        in
+        north-western Canada between 1896 and 1899. The Klondike Gold Rush is considered a migration of epic
+        proportions,
+        and it was one of the largest gold rushes in North America.</p>
+      <img src="img/news.jpg"></img>
     </article>
     <article class="scene" data-scene="1">
       <h2>STEP 2: Loading Points</h2>
@@ -147,11 +159,12 @@
 
     map = new mapboxgl.Map({
       container: 'map', // container ID
-      style: 'mapbox://styles/mapbox/light-v10',
-      zoom: 7, // starting zoom
+      // style: 'mapbox://styles/mapbox/light-v10',
+      style: 'mapbox://styles/mapbox/satellite-streets-v10', // style URL
+      zoom: 11, // starting zoom
       minZoom: 3,
-      maxZoom: 10,
-      center: [-121.93, 47.33], // starting center
+      maxZoom: 14,
+      center: [-122.33228030560824, 47.60580259714015], // starting center
       scrollZoom: false,
       boxZoom: false,
       doubleClickZoom: false
@@ -166,8 +179,8 @@
 
       // 6 wait till the data of washington counties and celltowers are fully loaded.
       let response, counties, celltowers;
-      response = await fetch("assets/wacountydata.geojson");
-      counties = await response.json();
+      response = await fetch("assets/trail.geojson");
+      trail = await response.json();
       response = await fetch("assets/celltowers.geojson");
       celltowers = await response.json();
 
@@ -181,19 +194,23 @@
           data: celltowers
         });
 
-        map.addSource('counties-src', {
+        map.addSource('trail-src', {
           type: 'geojson',
-          data: counties
+          data: trail
         });
 
-        countiesLayer = {
-          'id': 'counties-polygons',
-          'type': 'fill',
-          'source': 'counties-src',
+        trailLayer = {
+          'id': 'trail-lines',
+          'type': 'line',
+          'source': 'trail-src',
           'minzoom': 5,
+          'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
           'paint': {
-            'fill-color': '#0080ff',
-            'fill-opacity': 0.5
+            'line-color': '#888',
+            'line-width': 8
           }
         };
 
@@ -227,24 +244,24 @@
           if (index === 0) { // When enter the first scene
 
             map.flyTo({
-              center: [-121.93, 47.33],
-              zoom: 8,
+              center: [-122.33228030560824, 47.60580259714015],
+              zoom: 11,
               pitch: 0,
               speed: 0.5
             }); // fly to a new location
 
-            if (typeof (map.getSource('counties-src')) == 'undefined') { //if the map source 'counties-src' does not exist
-              map.addSource('counties-src', {
+            if (typeof (map.getSource('trail-src')) == 'undefined') { //if the map source 'counties-src' does not exist
+              map.addSource('trail-src', {
                 type: 'geojson',
-                data: counties
+                data: trail
               }); // reload the map source of 'counties-src'
             } else {
-              map.getSource('counties-src').setData(counties); // if the map source does not exist, relaod the data counties to the pre-defined map source 'counties-src'.
+              map.getSource('trail-src').setData(trail); // if the map source does not exist, relaod the data counties to the pre-defined map source 'counties-src'.
 
             }
 
-            if (!map.getLayer("counties-polygons")) { // if the map layer 'counties-polygons' does not exit
-              map.addLayer(countiesLayer);
+            if (!map.getLayer("trail-lines")) { // if the map layer 'counties-polygons' does not exit
+              map.addLayer(trailLayer);
             }
             document.getElementById("cover").style.visibility = "hidden"; // Hide the cover page
 
