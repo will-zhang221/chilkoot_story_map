@@ -76,29 +76,27 @@
       <img src="img/news.jpg"></img>
     </article>
     <article class="scene" data-scene="1">
-      <h2>STEP 2: Loading Points</h2>
+      <h2>Loading Points</h2>
+      <p>
+        Skagway, Alaska, was one of the main gateways to the Klondike during the gold rush of the late 1890s. This small port town became a bustling hub for stampeders arriving by ship, all seeking to begin their treacherous journey inland. From Skagway, many prospectors faced the grueling climb over the Chilkoot or White Pass trails, hauling a year’s worth of supplies through dangerous terrain. The town’s rapid growth, lawlessness, and colorful characters made it both a place of opportunity and hardship. Today, Skagway stands as a preserved reminder of the gold rush era and the incredible human ambition that fueled it.
+      </p>
+      <img src="img/skagway.jpg"></img>
     </article>
     <article class="scene" data-scene="2">
-      <h2>STEP 3: Relocate to Place A (Seattle)</h2>
+      <h2>Lake Bennett</h2>
     </article>
     <article class="scene" data-scene="3">
-      <h2>STEP 4: Relocate to Place B (Portland)</h2>
+      <h2>Alternate routes</h2>
     </article>
     <article class="scene" data-scene="4">
-      <h2>STEP 5: Text Script</h2>
-      <p>This section shows where active research is happening, and on what topics to communicate on-going nature of
-        scientific learning. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-        Aenean massa.
-        Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla
-        vel, aliquet nec,
-        vulputate eget, arcu. In enim justo, rhoncus ut, imperdet a, venenatis vitae, justo. Nullam dictum felis eu pede
-        mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate.
+      <h2>Dawson City</h2>
+      <p>
+        Dawson City was the ultimate destination for thousands of gold-seekers during the Klondike Gold Rush. Located at the confluence of the Klondike and Yukon rivers in Canada’s Yukon Territory, the city rapidly transformed from a remote outpost into a booming town nearly overnight. At its peak, Dawson City was home to over 30,000 people and served as the center of the gold rush economy. Although only a small fraction of prospectors actually found gold, the journey to Dawson and the town’s bustling atmosphere left a lasting legacy in the history of North American exploration and settlement.
       </p>
       <hr>
       <div>
         <!-- loading bootstrap icons -->
-        <p><i class="bi bi-person"></i> <span>2,823</span>
+        <p><i class="bi bi-person"></i> <span>~30,000</span>
         </p>
         <p><i class="bi bi-map"></i> <span>3,520</span>
         </p>
@@ -106,7 +104,10 @@
     </article>
     <article class="scene" data-scene="5">
       <h2>STEP 6: Image </h2>
-      <img src="img/portland.jpg"></img>
+      <article class="scene" data-scene="7">
+        
+       
+      </article>
     </article>
     <article class="scene fullscreen" data-scene="6">
       <h2>STEP 7: Ending Page</h2>
@@ -180,8 +181,7 @@
       // 6 wait till the data of washington counties and celltowers are fully loaded.
       let response, counties, celltowers;
       response = await fetch("assets/trail.geojson");
-      trail = await response.json();
-      response = await fetch("assets/celltowers.geojson");
+      trail = await response.json();response = await fetch("assets/celltowers.geojson");
       celltowers = await response.json();
 
 
@@ -244,7 +244,7 @@
           if (index === 0) { // When enter the first scene
 
             map.flyTo({
-              center: [-122.33228030560824, 47.60580259714015],
+              center: [-135.3145,59.4572],
               zoom: 11,
               pitch: 0,
               speed: 0.5
@@ -267,12 +267,14 @@
 
           } else if (index === 1) { // When enter the second scene.
             map.flyTo({
-              center: [-121.93, 47.33],
-              zoom: 8,
+              center: [-135.3145,59.4572],
+              zoom: 10,
               pitch: 60,
-              speed: 0.5
+              speed: 1
 
             });
+            
+            
 
             if (typeof (map.getSource('celltowers-src')) == 'undefined') {
               map.addSource('celltowers-src', {
@@ -288,9 +290,9 @@
               map.addLayer(cellTowersLayer);
             }
           } else if (index === 2) {
-            //Relocate to Seattle
+            //Relocate to lake bennett
             map.flyTo({
-              center: [-122.4121036, 47.6131229],
+              center: [-134.8805, 60.0799],
               zoom: 12,
               pitch: 0,
               speed: 0.5
@@ -298,28 +300,30 @@
             });
 
           } else if (index === 3) {
-            //Relocate to Portland
+            //Relocate to yukon delta
             map.flyTo({
-              center: [-122.724366, 45.5428119],
-              zoom: 12,
+              center: [-162.499323,63.193946],
+              zoom: 7,
               pitch: 60,
-              speed: 0.5
+              speed: 1
 
             });
 
             map.setStyle('mapbox://styles/mapbox/satellite-streets-v10'); // change the base map
-          } else if (index === 6) {
+          } else if (index === 4) {
 
             map.flyTo({
-              center: [-122.4121036, 47.6131229],
-              zoom: 12,
+              center: [-139.4333, 64.0639],
+              zoom: 10,
               pitch: 0,
-              speed: 0.5
+              speed: 1
 
             });
 
 
           }
+          -122.33228030560824, 47.60580259714015
+          
         }
 
         // 11. This function performs when a scene exists the storyboard
