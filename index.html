@@ -177,7 +177,7 @@
     map = new mapboxgl.Map({
       container: 'map', // container ID
       // style: 'mapbox://styles/mapbox/light-v10',
-      style: 'mapbox://styles/mapbox/satellite-streets-v10', // style URL
+      style: 'mapbox://styles/mapbox/satellite-streets-v12', // style URL
       zoom: 11, // starting zoom
       minZoom: 3,
       maxZoom: 14,
@@ -336,7 +336,7 @@
 
             });
 
-            map.setStyle('mapbox://styles/mapbox/satellite-streets-v10'); // change the base map
+            map.setStyle('mapbox://styles/mapbox/satellite-streets-v12'); // change the base map
           } else if (index === 4) {
 
             map.flyTo({
