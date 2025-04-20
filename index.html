@@ -9,12 +9,12 @@
   <title>GeoNarrative Template</title>
   <!-- <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,400;0,500;1,400;1,500&display=swap" /> -->
-  <!-- <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"> -->
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css">
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> -->
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/customized.css">
   <script src="https://unpkg.com/scrollama"></script>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.js"></script>
 </head>
 
 <body>
@@ -204,6 +204,15 @@
       // 7. Trigger operations inside of the the ()=> {} funciton while loading the map.
       map.on('load', () => {
 
+        map.addSource('mapbox-dem', {
+          'type': 'raster-dem',
+          'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          'tileSize': 512,
+          'maxzoom': 14
+        });
+        // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+
         // 8. add map source and declare layers.
         map.addSource('celltowers-src', {
           type: 'geojson',
@@ -340,7 +349,7 @@
           } else if (index === 5) {
 
             map.flyTo({
-              center: [-122.3328,47.6061],
+              center: [-122.3328, 47.6061],
               zoom: 10,
               pitch: 0,
               speed: 1
