@@ -1,0 +1,10 @@
+.scene img {
+  max-width: 90%;
+  width: 90%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+  border: 8px solid white; /* 👈 This adds a thin white border */
+  border-radius: 4px; /* Optional: smooths corners */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Optional: adds depth */
+}

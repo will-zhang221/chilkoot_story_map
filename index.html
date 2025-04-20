@@ -12,6 +12,7 @@
   <!-- <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"> -->
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"> -->
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/customized.css">
   <script src="https://unpkg.com/scrollama"></script>
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.js"></script>
 </head>
@@ -78,7 +79,12 @@
     <article class="scene" data-scene="1">
       <h2>Loading Points</h2>
       <p>
-        Skagway, Alaska, was one of the main gateways to the Klondike during the gold rush of the late 1890s. This small port town became a bustling hub for stampeders arriving by ship, all seeking to begin their treacherous journey inland. From Skagway, many prospectors faced the grueling climb over the Chilkoot or White Pass trails, hauling a year’s worth of supplies through dangerous terrain. The town’s rapid growth, lawlessness, and colorful characters made it both a place of opportunity and hardship. Today, Skagway stands as a preserved reminder of the gold rush era and the incredible human ambition that fueled it.
+        Skagway, Alaska, was one of the main gateways to the Klondike during the gold rush of the late 1890s. This small
+        port town became a bustling hub for stampeders arriving by ship, all seeking to begin their treacherous journey
+        inland. From Skagway, many prospectors faced the grueling climb over the Chilkoot or White Pass trails, hauling
+        a year’s worth of supplies through dangerous terrain. The town’s rapid growth, lawlessness, and colorful
+        characters made it both a place of opportunity and hardship. Today, Skagway stands as a preserved reminder of
+        the gold rush era and the incredible human ambition that fueled it.
       </p>
       <img src="img/skagway.jpg"></img>
     </article>
@@ -92,7 +98,12 @@
     <article class="scene" data-scene="4">
       <h2>Dawson City</h2>
       <p>
-        Dawson City was the ultimate destination for thousands of gold-seekers during the Klondike Gold Rush. Located at the confluence of the Klondike and Yukon rivers in Canada’s Yukon Territory, the city rapidly transformed from a remote outpost into a booming town nearly overnight. At its peak, Dawson City was home to over 30,000 people and served as the center of the gold rush economy. Although only a small fraction of prospectors actually found gold, the journey to Dawson and the town’s bustling atmosphere left a lasting legacy in the history of North American exploration and settlement.
+        Dawson City was the ultimate destination for thousands of gold-seekers during the Klondike Gold Rush. Located at
+        the confluence of the Klondike and Yukon rivers in Canada’s Yukon Territory, the city rapidly transformed from a
+        remote outpost into a booming town nearly overnight. At its peak, Dawson City was home to over 30,000 people and
+        served as the center of the gold rush economy. Although only a small fraction of prospectors actually found
+        gold, the journey to Dawson and the town’s bustling atmosphere left a lasting legacy in the history of North
+        American exploration and settlement.
       </p>
       <hr>
       <div>
@@ -106,8 +117,8 @@
     <article class="scene" data-scene="5">
       <h2>STEP 6: Image </h2>
       <article class="scene" data-scene="7">
-        
-       
+
+
       </article>
     </article>
     <article class="scene fullscreen" data-scene="6">
@@ -124,6 +135,7 @@
   <script>
     // 1. Declare the maps, script panels, and different thematic layers.
     let map, scriptPanel = scrollama(), countiesLayer, cellTowersLayer;
+    const seattle = [-122.33228030560824, 47.60580259714015];
 
     // 2. Intialize the layout.
 
@@ -166,7 +178,7 @@
       zoom: 11, // starting zoom
       minZoom: 3,
       maxZoom: 14,
-      center: [-122.33228030560824, 47.60580259714015], // starting center
+      center: seattle, // starting center
       scrollZoom: false,
       boxZoom: false,
       doubleClickZoom: false
@@ -182,7 +194,7 @@
       // 6 wait till the data of washington counties and celltowers are fully loaded.
       let response, counties, celltowers;
       response = await fetch("assets/trail.geojson");
-      trail = await response.json();response = await fetch("assets/celltowers.geojson");
+      trail = await response.json(); response = await fetch("assets/celltowers.geojson");
       celltowers = await response.json();
 
 
@@ -244,8 +256,10 @@
 
           if (index === 0) { // When enter the first scene
 
+            // [-135.3145, 59.4572],
+
             map.flyTo({
-              center: [-135.3145,59.4572],
+              center: seattle,
               zoom: 11,
               pitch: 0,
               speed: 0.5
@@ -268,28 +282,28 @@
 
           } else if (index === 1) { // When enter the second scene.
             map.flyTo({
-              center: [-135.3145,59.4572],
+              center: [-135.3145, 59.4572],
               zoom: 10,
               pitch: 60,
               speed: 1
 
             });
-            
-            
 
-            if (typeof (map.getSource('celltowers-src')) == 'undefined') {
-              map.addSource('celltowers-src', {
-                type: 'geojson',
-                data: celltowers
-              });
-            } else {
-              map.getSource('celltowers-src').setData(celltowers);
 
-            }
 
-            if (!map.getLayer("celltowers-points")) {
-              map.addLayer(cellTowersLayer);
-            }
+            // if (typeof (map.getSource('celltowers-src')) == 'undefined') {
+            //   map.addSource('celltowers-src', {
+            //     type: 'geojson',
+            //     data: celltowers
+            //   });
+            // } else {
+            //   map.getSource('celltowers-src').setData(celltowers);
+
+            // }
+
+            // if (!map.getLayer("celltowers-points")) {
+            //   map.addLayer(cellTowersLayer);
+            // }
           } else if (index === 2) {
             //Relocate to lake bennett
             map.flyTo({
@@ -303,7 +317,7 @@
           } else if (index === 3) {
             //Relocate to yukon delta
             map.flyTo({
-              center: [-162.499323,63.193946],
+              center: [-162.499323, 63.193946],
               zoom: 7,
               pitch: 60,
               speed: 1
@@ -323,8 +337,8 @@
 
 
           }
-          -122.33228030560824, 47.60580259714015
-          
+          // -122.33228030560824, 47.60580259714015
+
         }
 
         // 11. This function performs when a scene exists the storyboard
@@ -332,18 +346,18 @@
           var index = response.index;
 
           if (index === 0) {
-            if (map.getLayer("counties-polygons")) {
-              map.removeLayer('counties-polygons');
-            }
+            // if (map.getLayer("counties-polygons")) {
+            //   map.removeLayer('counties-polygons');
+            // }
             if (response.direction == 'down') {
               document.getElementById("cover").style.visibility = "hidden"; // when you scroll down, the cover page will be hided.
             } else {
               document.getElementById("cover").style.visibility = "visible"; // when you scroll up, the cover page will be shown.
             }
           } else if (index === 1) {
-            if (map.getLayer("celltowers-points")) {
-              map.removeLayer('celltowers-points');
-            }
+            // if (map.getLayer("celltowers-points")) {
+            //   map.removeLayer('celltowers-points');
+            // }
           } else if (index === 3) {
             //exit to Portland
             map.setStyle('mapbox://styles/mapbox/light-v10');
