@@ -136,6 +136,9 @@
     // 1. Declare the maps, script panels, and different thematic layers.
     let map, scriptPanel = scrollama(), countiesLayer, cellTowersLayer;
     const seattle = [-122.33228030560824, 47.60580259714015];
+    const skagway = [-135.3145, 59.4572];
+    const bennett = [-134.8805, 60.0799];
+    const yukon = [-162.499323, 63.193946];
 
     // 2. Intialize the layout.
 
@@ -282,7 +285,7 @@
 
           } else if (index === 1) { // When enter the second scene.
             map.flyTo({
-              center: [-135.3145, 59.4572],
+              center: skagway,
               zoom: 10,
               pitch: 60,
               speed: 1
@@ -307,7 +310,7 @@
           } else if (index === 2) {
             //Relocate to lake bennett
             map.flyTo({
-              center: [-134.8805, 60.0799],
+              center: bennett,
               zoom: 12,
               pitch: 0,
               speed: 0.5
@@ -317,7 +320,7 @@
           } else if (index === 3) {
             //Relocate to yukon delta
             map.flyTo({
-              center: [-162.499323, 63.193946],
+              center: yukon,
               zoom: 7,
               pitch: 60,
               speed: 1
